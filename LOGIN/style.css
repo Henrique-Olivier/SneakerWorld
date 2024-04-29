@@ -18,8 +18,9 @@ header {
 }
 
 .container {
-    height: 85vh;
+    height: 70vh;
     width: 100%;
+    /* background-color: red; */
 }
 
 .login-all {
@@ -36,14 +37,14 @@ header {
     width: 50%;
 }
 .login-img img{
-    width: 710px;
-    height: 650px;
+    width: 600px;
+    height: 520px;
 }
 
 .login-box {
     background-color: #6D4C41;
-    height: 450px;
-    width: 450px;
+    height: 400px;
+    width: 380px;
     border-radius: 15px;
 }
 .login-input input {
@@ -54,7 +55,13 @@ header {
     width: 280px;
     height: 40px;
     padding: 10px;
+    border-color: #7E57C2;
+    transition: 0.3s;
 }
+
+.login-input input:hover {
+    opacity: 0.8;
+} 
 
 .login-input button{
     background-color: #E0E0E0;
@@ -63,7 +70,27 @@ header {
     padding: 10px;
     border: none;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+
 }
+
+.login-input button:hover {
+    opacity: 0.8;
+
+}
+
+.login-input a {
+    border: none;
+    text-decoration: none;
+    font-family: 'inter', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: #3E2723;
+}
+
 .login-input {
     height: 100%;
     display: flex;
@@ -72,3 +99,20 @@ header {
     justify-content: space-around;
 
 }
+
+.login-input h1{
+    font-weight: 700;
+    font-size: 40px;
+    color: #F5F5F5;
+    margin-bottom: -5px;
+}
+
+.login-input input:focus-visible{
+    outline: 2px solid #7E57C2;
+ }
+
+#inp_usuario::-webkit-input-placeholder,#inp_senha::-webkit-input-placeholder {
+    color: #aaaaaa;
+    font-size: 20px;
+    font: bold;
+ }
