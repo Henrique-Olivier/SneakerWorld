@@ -14,10 +14,12 @@ nav {
     flex-direction: row;
     height: 100%;
     justify-content: space-around;
+    align-items: center;
 }
 
 .nav-list {
-    width: 60%;
+    margin-left: 350px;
+    width: 40%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -28,19 +30,26 @@ nav {
 .nav-list a {
     text-decoration: none;
     color: #311B92;
-    font-weight: 600;
+    font-weight: 800;
     font-size: 23px;
     letter-spacing: -1px;
 }
 
-.nav-list button {
+nav a img {
+    width: 200px;
+    height: 200px;
+}
+
+nav button {
     background-color: #6D4C41;
     border: none;
     width: 120px;
     height: 40px;
     border-radius: 40px;
 }
+
 #nav-button {
+    text-decoration: none;
     color: #F5F5F5;
     letter-spacing: 0.5px;
     font-size: 20px;
@@ -163,4 +172,19 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.joinUs {
+    margin-top: 7rem;
+    width: 100%;
+    display: flex;
+}
+
+.joinUsImage {
+    width: 50%;
+} 
+
+.joinUsText {
+    width: 50%;
+
 }
