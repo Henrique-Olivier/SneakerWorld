@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sneaker World | Cadastre-se</title>
     <link rel="stylesheet" href="cadastro.css">
 </head>
+
 <body>
-    
-<div class="container">
-    <div class="registerBox">
+
+    <div class="container">
+        <div class="registerBox">
             <div class="registerIlustration">
                 <img src="img/ilustrationRegister.png" alt="">
-                <a href="../LOGIN V2/login.html"><button >Voltar</button></a>
+                <a href="../LOGIN V2/login.html"><button>Voltar</button></a>
             </div>
             <div class="registerForm">
                 <div class="formText">
@@ -21,13 +23,14 @@
                 </div>
                 <div class="registerInput">
                     <label for="input_nome">Nome</label>
-                    <input type="text" id="input_nome" class="input" placeholder="Digite seu nome">
+                    <input required type="text" id="input_nome" class="input" placeholder="Digite seu nome">
                     <label for="input_sobrenome">Sobrenome</label>
-                    <input type="text" id="input_sobrenome" class="input" placeholder="Digite seu sobrenome">
+                    <input required type="text" id="input_sobrenome" class="input" placeholder="Digite seu sobrenome">
                     <label for="input_email">E-mail</label>
-                    <input type="text"id="input_email" class="input" placeholder="Digite seu e-mail">
+                    <small id="alerta_email"></small>
+                    <input required type="text" id="input_email" class="input" placeholder="Digite seu e-mail">
                     <label for="input_favorito">Qual sua marca favorita?</label>
-                    <select name="" id="input_favorito">
+                    <select required name="" id="input_favorito">
                         <option value="0">Escolha uma opção</option>
                         <option value="nike">Nike</option>
                         <option value="adidas">Adidas</option>
@@ -36,14 +39,75 @@
                         <option value="ous">Ous</option>
                     </select><br>
                     <label for="input_senha">Senha</label>
-                    <input type="text" id="input_senha" class="input" placeholder="Digite sua senha">
+                    <input required type="password" id="input_senha" class="input" placeholder="Digite sua senha">
                     <label for="confirmacaoSenha">Confirmação</label>
-                    <input type="text" id="confirmacaoSenha" class="input" placeholder="Confirme sua senha">
-                    <button>Cadastrar</button>
+                    <small id="alerta_confirmacao"></small>
+                    <input required type="password" id="confirmacaoSenha" class="input" placeholder="Confirme sua senha">
+                    <small id="alerta_cadastro"></small>
+                    <button onclick="cadastrar()">Cadastrar</button>
+                    <small id="alerta_cadastroRealizado"></small>
                 </div>
             </div>
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>
+
+<script>
+
+    function cadastrar() {
+
+
+        // declaração de variaveis 
+        const nome = input_nome.value
+        const sobrenome = input_sobrenome.value
+        const email = input_email.value
+        const favorito = input_favorito.value
+        const senha = input_senha.value
+        const confirmacao = confirmacaoSenha.value
+        const alerta_cadastro = document.querySelector('#alerta_cadastro')
+        const alerta_confirmacao = document.querySelector('#alerta_confirmacao')
+        const alerta_email = document.querySelector('#alerta_email')
+        const alerta_cadastroRealizado = document.querySelector('#alerta_cadastroRealizado')
+
+
+
+
+
+        // confimação campos 
+        if (nome == " " || sobrenome == " " || email == " " || favorito == "0" || senha == " " || confirmacao == " ") {
+            alerta_cadastro.innerHTML = 'Preencha todos os campos'
+            alerta_cadastro.style.display = 'block'
+            setTimeout(function () {
+                alerta_cadastro.innerHTML = ' '
+                alerta_cadastro.style.display = 'none'
+            }, 5000)
+        } else if (senha != confirmacao) {
+            alerta_confirmacao.innerHTML = 'As senhas são diferentes!'
+            alerta_confirmacao.style.display = 'block'
+            setTimeout(function () {
+                alerta_confirmacao.innerHTML = ' '
+                alerta_confirmacao.style.display = 'none'
+            }, 5000)
+        } else if (email.indexOf('@') == -1 ) {
+            alerta_email.innerHTML = 'O email precisa de um domínio (@exemplo.com)! '
+            alerta_email.style.display = 'block'
+            setTimeout(function () {
+                alerta_email.innerHTML = ' '
+                alerta_email.style.display = 'none'
+            }, 5000)
+        } else {
+            sessionStorage.setItem('emailSession', email);
+            sessionStorage.setItem('senhaSession', senha);
+            alerta_cadastroRealizado.innerHTML = 'Cadastro realizado com sucesso... <br> Redirecionando para o login'
+            alerta_cadastroRealizado.style.color = 'green'
+            alerta_cadastroRealizado.style.display = 'block'
+            setTimeout(function () {
+                window.location = '../LOGIN V2/login.html'
+            }, 3000)
+        }
+
+    }
+</script>

@@ -120,7 +120,7 @@ body {
 }
 
 .registerInput select:hover,
-.registerInput select:focus {
+ .registerInput select:focus {
   border: 2px solid #7E57C2;
   box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
   background-color: white;
@@ -148,4 +148,10 @@ body {
     border: 1px solid #F5F5F5;
     border-radius: 20px;
     cursor: pointer; 
+}
+
+small {
+  display: none;
+  color: #fb5f5f;
+  font-size: 20px;
 }

@@ -144,3 +144,14 @@
   border-radius: 20px;
   cursor: pointer; 
 }
+
+.loginInput label{
+  width: 80%;
+  text-align: start;
+}
+
+small {
+  display: none;
+  color: #fb5f5f;
+  font-size: 20px;
+}

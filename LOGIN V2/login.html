@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sneaker World | Login</title>
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
-    
+
     <div class="container">
         <div class="loginBox">
             <div class="loginForm">
@@ -19,17 +21,46 @@
                     <small>Ainda não tem uma conta? <a href="../CADASTRO/cadastro.html">Crie uma</a></small>
                 </div>
                 <div class="loginInput">
-                    <input class="input" placeholder="Digite seu usuário">
-                    <input class="input" placeholder="Digite sua senha">
-                    <button>Entrar</button>
+                    <label for="input_email">E-mail</label>
+                    <input class="input" id="input_email" placeholder="Digite seu e-mail">
+                    <label for="input_senha">Senha</label>
+                    <input type="password" class="input" id="input_senha" placeholder="Digite sua senha">
+                    <small id="alerta"></small>
+                    <button onclick="entrar()">Entrar</button>
                 </div>
             </div>
             <div class="loginIlustration">
                 <img src="../img/ilustracaoLogin.png" alt="">
-                <a href="/PÁGINA INICIAL/index.html"><button>Voltar</button></a>            
+                <a href="/PÁGINA INICIAL/index.html"><button>Voltar</button></a>
             </div>
         </div>
     </div>
 
 </body>
+
 </html>
+
+<script>
+    function entrar() {
+        const emailLogin = input_email.value
+        const senhaLogin = input_senha.value
+        const alerta = document.querySelector('#alerta')
+
+        const senhaSession = sessionStorage.getItem('senhaSession')
+        const emailSession = sessionStorage.getItem('emailSession')
+
+        if (emailLogin == emailSession && senhaLogin == senhaSession) {
+            window.location = '../TELA USUÁRIO/usuario.html'
+        } else {
+            alerta.innerHTML = 'Email ou usuário incorreto!'
+            alerta.style.display = 'block'
+            setTimeout(function () {
+                alerta.innerHTML = ''
+                alerta.style.display = 'none'
+            }, 5000)
+        }
+    }
+
+
+
+</script>
