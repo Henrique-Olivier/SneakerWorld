@@ -1,22 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="usuario.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+
+<body onload="CarregarDados()">
     <div class="sideBar">
         <div class="user">
             <img src="../img/usuario.png" alt="">
-            <p>Henrique <br>Olivier</p>
+            <div>
+                <p id="p_nome">Henrique</p>
+                <p id="p_sobrenome">Olivier</p>
+            </div>
         </div>
-        <p>Email: Henrique@Email.com</p>
-        <div class="favoriteBrand">
-            <p>Marca Favorita: </p>
-            <img src="../img/nike.png" alt="">
+        <div class="userData">
+            <h2>Seus Dados:</h2>
+            <div>
+                <h6>E-mail</h6>
+                <p id="email">Henrique@email.com</p>
+            </div>
+        </div>
+        <div class="favoriteBrand" id="favoriteBrand">
+            <h2>Marca Favorita:</h2>
+        </div>
+        <a href=""><button>Voltar</button></a>
+    </div>
+    <div class="screen">
+        <div class="FavoriteData">
+            <div class="FavoriteConter">
+                <h1>Contador Marcas</h1>
+                <div class="BrandBox">
+                    <div class="nike">
+                        <h2>Nike</h2>
+                        <h1 id="contador_nike">12</h1>
+                        <p>usuarios</p>
+                    </div>
+                    <div class="adidas">
+                        <h2>Adidas</h2>
+                        <h1 id="contador_adidas">14</h1>
+                        <p>usuarios</p>
+                    </div>
+                    <div class="vans">
+                        <h2>Vans</h2>
+                        <h1 id="contador_vans">24</h1>
+                        <p>usuarios</p>
+                    </div>
+                    <div class="puma">
+                        <h2>Puma</h2>
+                        <h1 id="contador_puma">27</h1>
+                        <p>usuarios</p>
+                    </div>
+                    <div class="ous">
+                        <h2>Ous</h2>
+                        <h1 id="contador_ous">20</h1>
+                        <p>usuarios</p>
+                    </div>
+                </div>
+            </div>
+            <div class="FavoriteChart">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
+
+<script>
+
+    function CarregarDados() {
+
+        let marca = sessionStorage.getItem('favoritoSession')
+        let nome = sessionStorage.getItem('nomeSession')
+        let sobrenome = sessionStorage.getItem('sobrenomeSession')
+        const addMarca = document.querySelector('#favoriteBrand')
+        const addNome = document.querySelector('#p_nome')
+        const addSobrenome = document.querySelector('#p_sobrenome')
+
+        const contadorNike = document.querySelector('#contador_nike')
+        let nike = Number(document.getElementById('contador_nike').innerHTML)
+
+        const contadorAdidas = document.querySelector('#contador_adidas')
+        let adidas = Number(document.getElementById('contador_adidas').innerHTML)
+
+        const contadorVans = document.querySelector('#contador_vans')
+        let vans = Number(document.getElementById('contador_vans').innerHTML)
+
+        const contadorPuma = document.querySelector('#contador_puma')
+        let puma = Number(document.getElementById('contador_puma').innerHTML)
+
+        const contadorOus = document.querySelector('#contador_ous')
+        let ous = Number(document.getElementById('contador_ous').innerHTML)
+
+        addNome.innerHTML = nome
+        addSobrenome.innerHTML = sobrenome
+
+        if (marca == 'nike') {
+            addMarca.innerHTML += `<img src="../img/nike.png" alt="">`
+            nike += 1
+            contadorNike.innerHTML = nike
+        } else if (marca == 'adidas') {
+            addMarca.innerHTML += `<img src="../img/adidas.png" alt="">`
+            adidas += 1
+            contadorAdidas.innerHTML = adidas
+        } else if (marca == 'vans') {
+            addMarca.innerHTML += `<img src="../img/vans.webp" alt="">`
+            vans += 1
+            contadorVans.innerHTML = vans
+        } else if (marca == 'puma') {
+            addMarca.innerHTML += `<img src="../img/puma.png" alt="">`
+            puma += 1
+            contadorPuma.innerHTML = puma
+        } else if (marca == 'ous') {
+            addMarca.innerHTML += `<img src="../img/ous.webp" alt="">`
+            ous += 1
+            contadorOus.innerHTML = ous
+        }
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        ctx.canvas.width = 1000;
+        ctx.canvas.height = 0;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Nike', 'Adidas', 'Vans', 'Puma', 'Ous'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [nike, adidas, vans, puma, ous],
+                    backgroundColor: 'rgba(49, 27, 146, 0.5)',
+                    borderColor: 'rgba(49, 27, 146, 0.6)',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+
+
+</script>

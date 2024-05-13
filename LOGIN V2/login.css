@@ -150,7 +150,7 @@
   text-align: start;
 }
 
-small {
+#alerta {
   display: none;
   color: #fb5f5f;
   font-size: 20px;

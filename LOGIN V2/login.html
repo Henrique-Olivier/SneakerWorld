@@ -51,7 +51,15 @@
 
         if (emailLogin == emailSession && senhaLogin == senhaSession) {
             window.location = '../TELA USUÁRIO/usuario.html'
-        } else {
+        } else if (emailSession == null) {
+            alerta.innerHTML = 'Este email não está cadastrado!'
+            alerta.style.display = 'block'
+            setTimeout(function () {
+                alerta.innerHTML = ''
+                alerta.style.display = 'none'
+            }, 5000)
+        }
+        else {
             alerta.innerHTML = 'Email ou usuário incorreto!'
             alerta.style.display = 'block'
             setTimeout(function () {

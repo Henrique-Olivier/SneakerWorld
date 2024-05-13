@@ -6,6 +6,12 @@
     padding: 0;
 }
 
+body {
+    background-color: #F5F5F5;
+    display: flex;
+
+}
+
 .sideBar {
     width: 15vw;
     height: 100vh;
@@ -19,4 +25,87 @@
 
 .sideBar img {
     width: 50%;
+}
+
+.user,.userData,.favoriteBrand {
+    color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #311B92;
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.user p {
+    font-size: 30px;
+    text-align: center;
+}
+
+.sideBar button {
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    color: #f5f5f5;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: transparent;
+    border: 1px solid #F5F5F5;
+    border-radius: 20px;
+    cursor: pointer; 
+}
+
+.screen {
+    width: 85vw;
+    height: 100vh;
+}
+.FavoriteData {
+    height: 27vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.FavoriteConter,.FavoriteChart {
+    padding: 10px;
+    width: 750px;
+    height: 200px;
+    background-color: #E9E9E9;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.FavoriteConter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nike, .adidas, .vans, .puma, .ous {
+    color: #F5F5F5;
+    width: 140px;
+    height: 150px;
+    background-color: rgb(49, 27, 146);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nike img, .adidas img, .vans img, .puma img, .ous img {
+    width: 75px;
+} 
+
+.BrandBox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
