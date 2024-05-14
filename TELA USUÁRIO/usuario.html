@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="usuario.css">
-    <script defer src="../game.js"></script>
+    <script defer src="./index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -67,19 +67,24 @@
                 <canvas id="myChart"></canvas>
             </div>
         </div>
-        <div class="memoryGame">
-            <main>
-                <header>
-                    <span>Movimentos: <span class="moves">00</span></span>
-                    <span>Tempo: <span class="timer">00</span></span>
-                </header>
-            <div class="container">
-                <h1>Jogo da Memoria</h1>
-                <div class="grid">
+        <div class="memorygameContainer">
+            <div class="memoryGame">
+                <main>
+                    <header>
+                        <span>Movimentos: <span class="moves">00</span></span>
+                        <span>Tempo: <span class="timer">00</span></span>
+                    </header>
+                <div class="container">
+                    <h1>Jogo da Memoria</h1>
+                    <div class="grid">
+                    </div>
+                    <button onclick="ButtonStart()" id="ButtonStart">Iniciar</button>
                 </div>
-                <button onclick="ButtonStart()" id="ButtonStart">Iniciar</button>
+                </main> 
             </div>
-            </main> 
+            <div class="kpiMemorygame">
+                
+            </div>
         </div>
     </div>
 </body>

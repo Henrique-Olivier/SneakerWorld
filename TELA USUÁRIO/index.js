@@ -34,7 +34,7 @@ const checkEndGame = () => {
         alert(`Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi: ${timer.innerHTML} segundos, com ${movesCount} Movimentos.`)
     }
 
-
+    
 }
 
 
