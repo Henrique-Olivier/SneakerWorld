@@ -2,6 +2,7 @@ const grid = document.querySelector('.grid');
 const spanPlayer = document.querySelector('.player')
 const timer = document.querySelector('.timer')
 const moves = document.querySelector('.moves')
+const StartButton = document.querySelector('#ButtonStart')
 
 const CardElements = [
      'img-1',
@@ -127,12 +128,90 @@ const startTimer = () => {
 }
 
 
-window.onload = () => {
+ const ButtonStart = () => {
     
+    StartButton.style.display = 'none'
+
     const playerName = localStorage.getItem('nome');
 
-    spanPlayer.innerHTML = playerName
+    // spanPlayer.innerHTML = playerName
     startTimer()
     LoadGame()
 }
 
+
+function CarregarDados() {
+
+    let marca = sessionStorage.getItem('favoritoSession')
+    let nome = sessionStorage.getItem('nomeSession')
+    let sobrenome = sessionStorage.getItem('sobrenomeSession')
+    const addMarca = document.querySelector('#favoriteBrand')
+    const addNome = document.querySelector('#p_nome')
+    const addSobrenome = document.querySelector('#p_sobrenome')
+
+    const contadorNike = document.querySelector('#contador_nike')
+    let nike = Number(document.getElementById('contador_nike').innerHTML)
+
+    const contadorAdidas = document.querySelector('#contador_adidas')
+    let adidas = Number(document.getElementById('contador_adidas').innerHTML)
+
+    const contadorVans = document.querySelector('#contador_vans')
+    let vans = Number(document.getElementById('contador_vans').innerHTML)
+
+    const contadorPuma = document.querySelector('#contador_puma')
+    let puma = Number(document.getElementById('contador_puma').innerHTML)
+
+    const contadorOus = document.querySelector('#contador_ous')
+    let ous = Number(document.getElementById('contador_ous').innerHTML)
+
+    addNome.innerHTML = nome
+    addSobrenome.innerHTML = sobrenome
+
+    if (marca == 'nike') {
+        addMarca.innerHTML += `<img src="../img/nike.png" alt="">`
+        nike += 1
+        contadorNike.innerHTML = nike
+    } else if (marca == 'adidas') {
+        addMarca.innerHTML += `<img src="../img/adidas.png" alt="">`
+        adidas += 1
+        contadorAdidas.innerHTML = adidas
+    } else if (marca == 'vans') {
+        addMarca.innerHTML += `<img src="../img/vans.webp" alt="">`
+        vans += 1
+        contadorVans.innerHTML = vans
+    } else if (marca == 'puma') {
+        addMarca.innerHTML += `<img src="../img/puma.png" alt="">`
+        puma += 1
+        contadorPuma.innerHTML = puma
+    } else if (marca == 'ous') {
+        addMarca.innerHTML += `<img src="../img/ous.webp" alt="">`
+        ous += 1
+        contadorOus.innerHTML = ous
+    }
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    ctx.canvas.width = 1000;
+    ctx.canvas.height = 0;
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Nike', 'Adidas', 'Vans', 'Puma', 'Ous'],
+            datasets: [{
+                label: '# of Votes',
+                data: [nike, adidas, vans, puma, ous],
+                backgroundColor: 'rgba(49, 27, 146, 0.5)',
+                borderColor: 'rgba(49, 27, 146, 0.6)',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+setInterval (CarregarDados(), 1000)
