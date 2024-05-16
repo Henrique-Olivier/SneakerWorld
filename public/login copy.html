@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneaker World | Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="loginBox">
+            <div class="loginForm">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="logo">
+                </div>
+                <div class="loginText">
+                    <h1>Seja bem vindo de volta!</h1>
+                    <small>Ainda não tem uma conta? <a href="../CADASTRO/cadastro.html">Crie uma</a></small>
+                </div>
+                <div class="loginInput">
+                    <label for="input_email">E-mail</label>
+                    <input class="input" id="input_email" placeholder="Digite seu e-mail">
+                    <label for="input_senha">Senha</label>
+                    <input type="password" class="input" id="input_senha" placeholder="Digite sua senha">
+                    <small id="alerta"></small>
+                    <button onclick="entrar()">Entrar</button>
+                </div>
+            </div>
+            <div class="loginIlustration">
+                <img src="../img/ilustracaoLogin.png" alt="">
+                <a href="/PÁGINA INICIAL/index.html"><button>Voltar</button></a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function entrar() {
+        const emailVar = input_email.value
+        const senhaVar = input_senha.value
+        const alerta = document.querySelector('#alerta')
+
+        if (emailVar == "" || senhaVar == "") {
+            alerta.style.display = "block"
+            alerta.innerHTML = "Preencha todos os campos!";
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
+                    sessionStorage.MARCAFAVORITA_USUARIO = json.marcaFavorita;
+                    
+                    setTimeout(function () {
+                        window.location = "usuario.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>
