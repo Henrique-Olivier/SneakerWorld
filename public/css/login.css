@@ -11,7 +11,7 @@
     width: 100vw;
     height: 100vh;
     /* background: linear-gradient(to top, #311B92, #7E57C2); */
-    background-image: url('../img/backgroundLogin.jpg');
+    background-image: url('../assets/imgs/backgroundLogin.jpg');
     background-size: cover;
     display: flex;
     flex-direction: column;

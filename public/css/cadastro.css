@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('img/registerbackground.jpg');
+    background-image: url('../assets/imgs/registerbackground.jpg');
 
     background-size: cover;
 }

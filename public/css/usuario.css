@@ -110,7 +110,7 @@ body {
     align-items: center;
 }
 
-.memoryGame {
+.memoryGame {  
     height: 73vh;
     width: 42.5vw;
 }
@@ -128,21 +128,25 @@ main {
 header {
 display: flex;
 align-items: center;
-justify-content: space-between;
-background-color: rgba(255,255,255, 1);
+justify-content: space-around;
+background-color: #E9E9E9;
+box-shadow: 3px 3px 3px 3px rgba(0, 0,0, 0.1);
 font-size: 1.5em;
-width: 90%;
+width: 750px;
+padding: 10px;
 margin: 0 0 30px;
-border-radius: 5px;
+border-radius: 15px;
 }
 
 .container {
-    width: 600px;
+    padding: 10px;
+    width: 750px;
     height: 600px;
-    background-color: #f5f5f5;
+    background-color: #E9E9E9;
     border-radius: 15px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0,0, 0.05);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0,0, 0.1);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -164,7 +168,7 @@ border-radius: 5px;
     aspect-ratio: 3/4;
     width: 100%;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 20px;
     position: relative;
     transition: all 400ms ease;
     transform-style: preserve-3d;
@@ -182,6 +186,7 @@ border-radius: 5px;
 .face img {
     width: 100px;
     height: 100px; 
+    border-radius: 20px;
 }
 
 .front {
@@ -189,7 +194,9 @@ border-radius: 5px;
 }
 
 .back{
-    background-color: #E0E0E0;
+    border-radius: 20px;
+    background-color: #311B92;
+    background-image: url('../assets/imgs/internet.png');
     backface-visibility: hidden;
 }
 
@@ -200,4 +207,34 @@ border-radius: 5px;
 .disable-card {
     filter: saturate(0);
     opacity: 0.5;
+}
+
+.container button {
+    font-size: 24px;
+    color: #E9E9E9;
+    background-color: #311B92;
+    border-radius: 15px;
+    border: none;
+    width: 200px;
+    height: 50px;
+}
+.container h1 {
+    color:#311B92;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+/* FINAL CSS JOGO DA MEMORIA */
+
+
+.memorygameContainer {
+    height: 73vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.kpiMemorygame {
+    height: 73vh;
+    width: 42.5vw;
+    background-color: #7E57C2;
 }

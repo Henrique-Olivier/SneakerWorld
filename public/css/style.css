@@ -59,7 +59,7 @@ nav button {
 .home {
     width: 100%;
     height: 85vh;
-    background-image: url('../img/homebackground.png');    
+    background-image: url('../assets/imgs/homebackground.png');    
     background-size: cover;
     display: flex;
 }
@@ -85,7 +85,7 @@ nav button {
 
 .homeIlustration {
     width: 50%;
-    background-image: url('../img/ilustracaohome.png');
+    background-image: url('../assets/imgs/ilustracaohome.png');
     background-size: cover;
 }
 

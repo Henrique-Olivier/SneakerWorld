@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil</title>
     <link rel="stylesheet" href="./css/usuario.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/internet.png">
+    <script src="./js/sessao.js"></script>
 </head>
 
 
@@ -16,7 +18,7 @@
 <body onload="CarregarDados()">
     <div class="sideBar">
         <div class="user">
-            <img src="../img/usuario.png" alt="">
+            <img src="./assets/imgs/usuario.png" alt="">
             <div>
                 <p id="p_nome">Henrique</p>
                 <p id="p_sobrenome">Olivier</p>
@@ -32,7 +34,7 @@
         <div class="favoriteBrand" id="favoriteBrand">
             <h2>Marca Favorita:</h2>
         </div>
-        <a href=""><button>Voltar</button></a>
+        <button onclick="limparSessao()">Sair</button>
     </div>
     <div class="screen">
         <div class="FavoriteData">
@@ -70,18 +72,24 @@
                 <canvas id="myChart"></canvas>
             </div>
         </div>
-        <div class="memoryGame">
-            <main>
-                <header>
-                    <span class="player"></span>
-                    <span>Movimentos: <span class="moves">00</span></span>
-                    <span>Tempo: <span class="timer">00</span></span>
-                </header>
+        <div class="memorygameContainer">
+            <div class="memoryGame">
+                <main>
+                    <header>
+                        <span>Movimentos: <span class="moves">00</span></span>
+                        <span>Tempo: <span class="timer">00</span></span>
+                    </header>
                 <div class="container">
+                    <h1>Jogo da Memoria</h1>
                     <div class="grid">
                     </div>
+                    <button onclick="ButtonStart()" id="ButtonStart">Iniciar</button>
                 </div>
-            </main>
+                </main> 
+            </div>
+            <div class="kpiMemorygame">
+                
+            </div>
         </div>
     </div>
 </body>
@@ -93,6 +101,7 @@
     const spanPlayer = document.querySelector('.player')
     const timer = document.querySelector('.timer')
     const moves = document.querySelector('.moves')
+    const StartButton = document.querySelector('#ButtonStart')
 
     const CardElements = [
         'img-1',
@@ -183,7 +192,7 @@
         const front = createElement('div', 'face front');
         const back = createElement('div', 'face back');
 
-        front.style.backgroundImage = `url('../img/${CardElement}.png')`;
+        front.style.backgroundImage = `url('./assets/imgs/${CardElement}.png')`;
 
         card.appendChild(front);
         card.appendChild(back);
@@ -218,20 +227,23 @@
     }
 
 
-    window.onload = () => {
+    const ButtonStart = () => {
+
+        StartButton.style.display = 'none'
 
         const playerName = localStorage.getItem('nome');
 
-        spanPlayer.innerHTML = playerName
+        // spanPlayer.innerHTML = playerName
         startTimer()
         LoadGame()
     }
 
     function CarregarDados() {
 
-        let marca = sessionStorage.getItem('favoritoSession')
-        let nome = sessionStorage.getItem('nomeSession')
-        let sobrenome = sessionStorage.getItem('sobrenomeSession')
+        let marca = sessionStorage.getItem('MARCAFAVORITA_USUARIO')
+        let nome = sessionStorage.getItem('NOME_USUARIO')
+        let sobrenome = sessionStorage.getItem('SOBRENOME_USUARIO')
+
         const addMarca = document.querySelector('#favoriteBrand')
         const addNome = document.querySelector('#p_nome')
         const addSobrenome = document.querySelector('#p_sobrenome')
@@ -254,24 +266,25 @@
         addNome.innerHTML = nome
         addSobrenome.innerHTML = sobrenome
 
+
         if (marca == 'nike') {
-            addMarca.innerHTML += `<img src="../img/nike.png" alt="">`
+            addMarca.innerHTML += `<img src="./assets/imgs/nike.png" alt="">`
             nike += 1
             contadorNike.innerHTML = nike
         } else if (marca == 'adidas') {
-            addMarca.innerHTML += `<img src="../img/adidas.png" alt="">`
+            addMarca.innerHTML += `<img src="./assets/imgs/adidas.png" alt="">`
             adidas += 1
             contadorAdidas.innerHTML = adidas
         } else if (marca == 'vans') {
-            addMarca.innerHTML += `<img src="../img/vans.webp" alt="">`
+            addMarca.innerHTML += `<img src="./assets/imgs/vans.webp" alt="">`
             vans += 1
             contadorVans.innerHTML = vans
         } else if (marca == 'puma') {
-            addMarca.innerHTML += `<img src="../img/puma.png" alt="">`
+            addMarca.innerHTML += `<img src="./assets/imgs/puma.png" alt="">`
             puma += 1
             contadorPuma.innerHTML = puma
         } else if (marca == 'ous') {
-            addMarca.innerHTML += `<img src="../img/ous.webp" alt="">`
+            addMarca.innerHTML += `<img src="./assets/imgs/ous.webp" alt="">`
             ous += 1
             contadorOus.innerHTML = ous
         }

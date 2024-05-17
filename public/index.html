@@ -1,82 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Página Inicial</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/internet.png">
 </head>
 
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
-      </div>
-    </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
+    <header>
+        <nav>
+            <a href="">
+                <img src="./assets/imgs/logo.png" alt="">
+            </a>
+            <ul class="nav-list">
+                <li><a href="#"><i>Inicio</i></a></li>
+                <li><a href="#"><i>Sobre</i></a></li>
+                <li><a href="#"><i>Lançamentos</i></a></li>
+                <li><a href="#"><i>Notícias</i></a></li>
+                <li><a href="#"><i>Sustentabilidade</i></a></li>
+            </ul>
+            <button><a href="login.html" id="nav-button">Entrar</a></button>
+        </nav>
+    </header>
+    <div class="home">
+        <div class="homeText">
+            <div>
+                <h1>Bem vindo ao <i><br>Sneaker <br>World!</i></h1>
+                <p><i>Explore a paixão, a cultura e a inovação por<br> trás dos sneakers. Se você é um entusiasta<br> de
+                    calçados, um colecionador ávido ou<br> apenas curioso sobre esse universo em<br> constante evolução,
+                    você veio ao lugar<br> certo!</i></p>
+                    <button>Conheça mais</button>
+            </div>
         </div>
-      </div>
+        <div class="homeIlustration">
+
+        </div>
     </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
-      </div>
+    <div class="about">
+        <h1>Por que a Mundo Sneaker?</h1>
+        <h3><i>Somos mais do que apenas um site sobre tênis. Somos uma<br> comunidade apaixonada que celebra a história, o design e a tecnologia<br> por trás de cada par de sneaker. Aqui, você encontrará:</i></h3>
+
+        <div class="aboutBoxes">
+            <div class="box">
+                <div class="boxCircle" id="bookCircle">
+                    <img src="./assets/imgs/livro.png" alt="">
+                </div>
+                <div class="boxBottom">
+                    <div class="boxText">
+                        <h1><i>História<br>Fascinante:</i></h1>
+                        <p><i>Descubra a fascinante<br> história por trás de marcas<br> icônicas, colaborações<br> lendárias e os momentos<br> que moldaram a cultura<br> sneaker.</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="boxCircle">
+                    <img src="./assets/imgs/estrela.png" alt="">
+                </div>
+                <div class="boxBottom">
+                    <div class="boxText">
+                        <h1><i>Notícias e <br>Lançamentos:</i></h1>
+                        <p><i>Fique atualizado com as últimas notícias, lançamentos exclusivos e rumores do mundo sneaker. Não perca nenhuma novidade do seu calçado favorito!</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="boxCircle">
+                    <img src="./assets/imgs/comentarios.png" alt="">
+                </div>
+                <div class="boxBottom">
+                    <div class="boxText">
+                        <h1><i>História<br>Fascinante:</i></h1>
+                        <p><i>Aprofunde-se com análises detalhadas de modelos populares, incluindo conforto, desempenho e estilo. Saiba tudo o que você precisa antes de investir no seu próximo par.</i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+    <div class="joinUs">
+        <div class="joinUsImage">
+            
+        </div>
+        <div class="joinUsText">
+            
+        </div>
+    </div>
+</body>
 
 </html>
