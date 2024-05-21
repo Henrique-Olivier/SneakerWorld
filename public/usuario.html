@@ -43,27 +43,27 @@
                 <div class="BrandBox">
                     <div class="nike">
                         <h2>Nike</h2>
-                        <h1 id="contador_nike">12</h1>
+                        <h1 id="contador_nike">0</h1>
                         <p>usuarios</p>
                     </div>
                     <div class="adidas">
                         <h2>Adidas</h2>
-                        <h1 id="contador_adidas">14</h1>
+                        <h1 id="contador_adidas">0</h1>
                         <p>usuarios</p>
                     </div>
                     <div class="vans">
                         <h2>Vans</h2>
-                        <h1 id="contador_vans">24</h1>
+                        <h1 id="contador_vans">0</h1>
                         <p>usuarios</p>
                     </div>
                     <div class="puma">
                         <h2>Puma</h2>
-                        <h1 id="contador_puma">27</h1>
+                        <h1 id="contador_puma">0</h1>
                         <p>usuarios</p>
                     </div>
                     <div class="ous">
                         <h2>Ous</h2>
-                        <h1 id="contador_ous">20</h1>
+                        <h1 id="contador_ous">0</h1>
                         <p>usuarios</p>
                     </div>
                 </div>
@@ -79,16 +79,16 @@
                         <span>Movimentos: <span class="moves">00</span></span>
                         <span>Tempo: <span class="timer">00</span></span>
                     </header>
-                <div class="container">
-                    <h1>Jogo da Memoria</h1>
-                    <div class="grid">
+                    <div class="container">
+                        <h1>Jogo da Memoria</h1>
+                        <div class="grid">
+                        </div>
+                        <button onclick="ButtonStart()" id="ButtonStart">Iniciar</button>
                     </div>
-                    <button onclick="ButtonStart()" id="ButtonStart">Iniciar</button>
-                </div>
-                </main> 
+                </main>
             </div>
             <div class="kpiMemorygame">
-                
+
             </div>
         </div>
     </div>
@@ -243,49 +243,49 @@
         let marca = sessionStorage.getItem('MARCAFAVORITA_USUARIO')
         let nome = sessionStorage.getItem('NOME_USUARIO')
         let sobrenome = sessionStorage.getItem('SOBRENOME_USUARIO')
+        let contadorGeral = sessionStorage.getItem('CONTADORMARCAS')
+        const arrayContador = JSON.parse(contadorGeral);
 
         const addMarca = document.querySelector('#favoriteBrand')
         const addNome = document.querySelector('#p_nome')
         const addSobrenome = document.querySelector('#p_sobrenome')
 
+        let nike = arrayContador[0].contador
+        let adidas = arrayContador[1].contador
+        let vans = arrayContador[2].contador
+        let puma = arrayContador[3].contador
+        let ous = arrayContador[4].contador
+
         const contadorNike = document.querySelector('#contador_nike')
-        let nike = Number(document.getElementById('contador_nike').innerHTML)
-
         const contadorAdidas = document.querySelector('#contador_adidas')
-        let adidas = Number(document.getElementById('contador_adidas').innerHTML)
-
         const contadorVans = document.querySelector('#contador_vans')
-        let vans = Number(document.getElementById('contador_vans').innerHTML)
-
         const contadorPuma = document.querySelector('#contador_puma')
-        let puma = Number(document.getElementById('contador_puma').innerHTML)
-
         const contadorOus = document.querySelector('#contador_ous')
-        let ous = Number(document.getElementById('contador_ous').innerHTML)
+
+        contadorNike.innerHTML = nike
+        contadorAdidas.innerHTML = adidas
+        contadorVans.innerHTML = vans
+        contadorPuma.innerHTML = puma
+        contadorOus.innerHTML = ous
 
         addNome.innerHTML = nome
         addSobrenome.innerHTML = sobrenome
 
 
-        if (marca == 'nike') {
+        if (marca == 1) {
             addMarca.innerHTML += `<img src="./assets/imgs/nike.png" alt="">`
-            nike += 1
             contadorNike.innerHTML = nike
-        } else if (marca == 'adidas') {
+        } else if (marca == 2) {
             addMarca.innerHTML += `<img src="./assets/imgs/adidas.png" alt="">`
-            adidas += 1
             contadorAdidas.innerHTML = adidas
-        } else if (marca == 'vans') {
+        } else if (marca == 3) {
             addMarca.innerHTML += `<img src="./assets/imgs/vans.webp" alt="">`
-            vans += 1
             contadorVans.innerHTML = vans
-        } else if (marca == 'puma') {
+        } else if (marca == 4) {
             addMarca.innerHTML += `<img src="./assets/imgs/puma.png" alt="">`
-            puma += 1
             contadorPuma.innerHTML = puma
-        } else if (marca == 'ous') {
+        } else if (marca == 5) {
             addMarca.innerHTML += `<img src="./assets/imgs/ous.webp" alt="">`
-            ous += 1
             contadorOus.innerHTML = ous
         }
 

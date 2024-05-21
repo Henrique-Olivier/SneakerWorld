@@ -70,7 +70,7 @@ body {
     justify-content: space-around;
     align-items: center;
 }
-.FavoriteConter,.FavoriteChart {
+.FavoriteConter {
     padding: 10px;
     width: 750px;
     height: 200px;
@@ -78,6 +78,16 @@ body {
     border-radius: 20px;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
 }
+
+.FavoriteChart {
+    padding: 10px;
+    width: 750px;
+    height: 200px;
+    background-color: #E9E9E9;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
 
 .FavoriteConter {
     display: flex;

@@ -1,5 +1,6 @@
-var usuarioModel = require("../models/usuarioModel");
 // var aquarioModel = require("../models/aquarioModel");
+var usuarioModel = require("../models/usuarioModel");
+var contadorModel = require("../models/contadorModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -19,13 +20,22 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        res.json({
-                            email: resultadoAutenticar[0].email,
-                            nome: resultadoAutenticar[0].nome,
-                            sobrenome: resultadoAutenticar[0].sobrenome,
-                            marcaFavorita: resultadoAutenticar[0].marcaFavorita
-                        });
 
+                        contadorModel.ContarMarcasFavoritas()
+                            .then((resultadoContador) => {
+                                if (resultadoContador.length > 0) {
+                                    res.json({
+                                        email: resultadoAutenticar[0].email,
+                                        nome: resultadoAutenticar[0].nome,
+                                        sobrenome: resultadoAutenticar[0].sobrenome,
+                                        marcaFavorita: resultadoAutenticar[0].fkmarcaFavorita,
+                                        contador: resultadoContador
+                                    });
+                                } else {
+                                    res.status(204).json({ aquarios: [] });
+                                }
+
+                            })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -60,9 +70,9 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else if (sobrenome == undefined) {
         res.status(400).send("Seu sobrenome está undefined!");
-    } else if (favorito == undefined) { 
+    } else if (favorito == undefined) {
         res.status(400).send("Seu favorito está undefined!");
-    }else {
+    } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nome, sobrenome, email, senha, favorito)

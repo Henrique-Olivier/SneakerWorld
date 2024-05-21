@@ -79,6 +79,7 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
                     sessionStorage.MARCAFAVORITA_USUARIO = json.marcaFavorita;
+                    sessionStorage.CONTADORMARCAS = JSON.stringify(json.contador)
                     
                     setTimeout(function () {
                         window.location = "usuario.html";
