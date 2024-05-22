@@ -1,6 +1,7 @@
 // var aquarioModel = require("../models/aquarioModel");
 var usuarioModel = require("../models/usuarioModel");
 var contadorModel = require("../models/contadorModel");
+var rankingModel = require("../models/rankingModel")
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -24,14 +25,23 @@ function autenticar(req, res) {
                         contadorModel.ContarMarcasFavoritas()
                             .then((resultadoContador) => {
                                 if (resultadoContador.length > 0) {
-                                    res.json({
-                                        id: resultadoAutenticar[0].idUsuario,
-                                        email: resultadoAutenticar[0].email,
-                                        nome: resultadoAutenticar[0].nome,
-                                        sobrenome: resultadoAutenticar[0].sobrenome,
-                                        marcaFavorita: resultadoAutenticar[0].fkmarcaFavorita,
-                                        contador: resultadoContador
-                                    });
+
+                                    rankingModel.MontarRanking()
+                                        .then((resultadoRanking) => {
+
+                                            res.json({
+                                                id: resultadoAutenticar[0].idUsuario,
+                                                email: resultadoAutenticar[0].email,
+                                                nome: resultadoAutenticar[0].nome,
+                                                sobrenome: resultadoAutenticar[0].sobrenome,
+                                                marcaFavorita: resultadoAutenticar[0].fkmarcaFavorita,
+                                                menorMovimento: resultadoAutenticar[0].MenorMovimentos,
+                                                menorTempo: resultadoAutenticar[0].MenorTempo,
+                                                contador: resultadoContador,
+                                                ranking: resultadoRanking
+                                            });
+                                        })
+
                                 } else {
                                     res.status(204).json({ aquarios: [] });
                                 }

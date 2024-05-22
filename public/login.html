@@ -80,7 +80,10 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
                     sessionStorage.MARCAFAVORITA_USUARIO = json.marcaFavorita;
+                    sessionStorage.RECORD_TEMPO = json.menorTempo;
+                    sessionStorage.RECORD_MOVIMENTOS = json.menorMovimento;
                     sessionStorage.CONTADORMARCAS = JSON.stringify(json.contador)
+                    sessionStorage.RANKING = JSON.stringify(json.ranking)
                     
                     setTimeout(function () {
                         window.location = "usuario.html";
