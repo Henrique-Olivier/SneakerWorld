@@ -88,7 +88,52 @@
                 </main>
             </div>
             <div class="kpiMemorygame">
+                <div class="record">
+                    <div class="timeRecord">
+                        <h1>Seu record de<br> movimentos é:</h1>
+                    </div>
+                    <div class="movesRecord">
+                        <h1>Seu record de<br> tempo é:</h1>
 
+                    </div>
+                    <div class="gameRecord">
+                        <h1>Seu melhor jogo foi:</h1>
+
+                    </div>
+                </div>
+                <div class="ranking">
+                    <h1>Ranking <br> jogo da memória:</h1>
+                    <div class="rankingGrid">
+                        <div class="rankingPosition">
+                            <div class="positionNumber">
+                                <p>1º</p>
+                            </div>
+                            <div class="playerName">
+                                <p>Henrique</p>
+                            </div>
+                            <div class="playerMoves">
+                                <p>00</p>
+                            </div>
+                            <div class="playerTime">
+                                <P>00</P>
+                            </div>
+                        </div>
+                        <div class="rankingPosition">
+                            <div class="positionNumber">
+                                <p>2º</p>
+                            </div>
+                            <div class="playerName">
+                                <p>Henrique</p>
+                            </div>
+                            <div class="playerMoves">
+                                <p>00</p>
+                            </div>
+                            <div class="playerTime">
+                                <P>00</P>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -125,16 +170,75 @@
     let movesCount = 0
 
     const checkEndGame = () => {
+    const disabledCards = document.querySelectorAll('.disable-card');
 
-        const disabledCard = document.querySelectorAll('.disable-card');
+    if (disabledCards.length === 16) {
+        const idVar = sessionStorage.ID_USUARIO;
+        const tempoVar = timer.innerHTML;
+        clearInterval(this.loop);
 
-        if (disabledCard.length == 16) {
-            clearInterval(this.loop)
-            alert(`Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi: ${timer.innerHTML} segundos, com ${movesCount} Movimentos.`)
-        }
+        alert(`Parabéns! Seu tempo foi: ${tempoVar} segundos, com ${movesCount} Movimentos.`);
 
+        fetch('/avisos/publicar', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tempoServer: tempoVar,
+                movimentosServer: movesCount
+            })
+        }).then(resposta => {
+            if (resposta.ok) {
+                return resposta.json();
+            } else if (resposta.status === 404) {
+                window.alert("Deu 404!");
+                return null;
+            } else {
+                throw new Error("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).then(data => {
+            if (data) {
+                let idRegistro = data.insertId
+                let idUsuario = sessionStorage.getItem('ID_USUARIO')
+                // window.alert("Realizado Cadastro memory game");
+             
+                fetch(`/avisos/cadastrarRanking`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idRegistroServer: idRegistro,
+                idUsuarioServer: idUsuario
+            })
+        }).then(function (resposta) {
 
+            console.log("resposta: ", resposta);
+            
+            if (resposta.ok) {
+                // window.alert("ranking cad");
+                window.location.reload(true)
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("erro ranking" + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+
+            }
+        }).catch(erro => {
+            console.error(`#ERRO: ${erro}`);
+        });
+
+        return false;
     }
+}
 
 
     const checkCards = () => {
@@ -241,7 +345,7 @@
     function CarregarDados() {
 
         let marca = sessionStorage.getItem('MARCAFAVORITA_USUARIO')
-        let nome = sessionStorage.getItem('NOME_USUARIO')
+        const nome = sessionStorage.getItem('NOME_USUARIO')
         let sobrenome = sessionStorage.getItem('SOBRENOME_USUARIO')
         let contadorGeral = sessionStorage.getItem('CONTADORMARCAS')
         const arrayContador = JSON.parse(contadorGeral);
