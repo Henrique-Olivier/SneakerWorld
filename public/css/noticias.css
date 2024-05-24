@@ -160,9 +160,9 @@ nav button:hover{
 
 .newsHeader {
   color: #311B92;
-  width: 80%;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   font-size: 30px;
 }

@@ -219,7 +219,7 @@
                         if (resposta.ok) {
                             // window.alert("ranking cad");
 
-                            window.location.reload(true)
+                            atualizarDados()
                         } else if (resposta.status == 404) {
                             window.alert("Deu 404!");
                         } else {
@@ -381,6 +381,7 @@
                     
                 });
 
+                window.location.reload(true)
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
@@ -395,8 +396,7 @@
             console.log(erro);
         })
 
-        window.location.reload(true)
-        CarregarDados()
+        // window.location.reload(true)
         return false;
 
     }
