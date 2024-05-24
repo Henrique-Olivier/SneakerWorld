@@ -267,6 +267,10 @@ border-radius: 15px;
 }
 
 .timeRecord, .movesRecord, .gameRecord{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     width: 15vw;
     height: 27%;
     background-color: #E9E9E9;

@@ -64,6 +64,67 @@ function autenticar(req, res) {
 
 }
 
+function atualizarDados(req, res) {
+    var email = req.body.emailServer;
+    var idUsuario = req.body.idUsuarioServer;
+
+    if (email == undefined) {
+        res.status(400).send("Seu email está indefinida!");
+    } else if (idUsuario == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else {
+
+        usuarioModel.atualizarDados(email, idUsuario)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+
+                        contadorModel.ContarMarcasFavoritas()
+                            .then((resultadoContador) => {
+                                if (resultadoContador.length > 0) {
+
+                                    rankingModel.MontarRanking()
+                                        .then((resultadoRanking) => {
+
+                                            res.json({
+                                                id: resultadoAutenticar[0].idUsuario,
+                                                email: resultadoAutenticar[0].email,
+                                                nome: resultadoAutenticar[0].nome,
+                                                sobrenome: resultadoAutenticar[0].sobrenome,
+                                                marcaFavorita: resultadoAutenticar[0].fkmarcaFavorita,
+                                                menorMovimento: resultadoAutenticar[0].MenorMovimentos,
+                                                menorTempo: resultadoAutenticar[0].MenorTempo,
+                                                contador: resultadoContador,
+                                                ranking: resultadoRanking
+                                            });
+                                        })
+
+                                } else {
+                                    res.status(204).json({ aquarios: [] });
+                                }
+
+                            })
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -106,5 +167,6 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    atualizarDados
 }

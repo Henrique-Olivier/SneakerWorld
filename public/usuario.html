@@ -97,9 +97,9 @@
                         <h1>Seu record de<br> tempo é:</h1>
                         <p id="inserir_record_tempo"></p>
                     </div>
-                    <div class="gameRecord">
+                    <!-- <div class="gameRecord">
                         <h1>Seu melhor jogo foi:</h1>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="ranking">
                     <h1>Ranking <br> jogo da memória:</h1>
@@ -218,6 +218,7 @@
 
                         if (resposta.ok) {
                             // window.alert("ranking cad");
+
                             window.location.reload(true)
                         } else if (resposta.status == 404) {
                             window.alert("Deu 404!");
@@ -342,7 +343,68 @@
         LoadGame()
     }
 
+    function atualizarDados() {
+        const emailVar = sessionStorage.getItem("EMAIL_USUARIO")
+        const idUsuarioVar = sessionStorage.getItem("ID_USUARIO")
+        // const alerta = document.querySelector('#alerta')
+
+        // console.log("FORM LOGIN: ", emailVar);
+        // console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/atualizarDados", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                idUsuarioServer: idUsuarioVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
+                    sessionStorage.MARCAFAVORITA_USUARIO = json.marcaFavorita;
+                    sessionStorage.RECORD_TEMPO = json.menorTempo;
+                    sessionStorage.RECORD_MOVIMENTOS = json.menorMovimento;
+                    sessionStorage.CONTADORMARCAS = JSON.stringify(json.contador)
+                    sessionStorage.RANKING = JSON.stringify(json.ranking)
+                    
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        window.location.reload(true)
+        CarregarDados()
+        return false;
+
+    }
+    
+
+
     function CarregarDados() {
+        
 
         let marca = sessionStorage.getItem('MARCAFAVORITA_USUARIO')
         const nome = sessionStorage.getItem('NOME_USUARIO')
@@ -378,8 +440,27 @@
 
         addNome.innerHTML = nome
         addSobrenome.innerHTML = sobrenome
-        addTempo.innerHTML = recordtempo
-        addMovimentos.innerHTML = recordMovimentos
+
+        if(recordtempo == 'null') {
+            addTempo.innerHTML = 'Jogue a primeira vez!'    
+        } else {
+            addTempo.innerHTML = `${recordtempo} segundos!`
+        }
+
+        if (recordMovimentos == 'null') {
+            addMovimentos.innerHTML = 'Jogue a primeira vez!'
+        } else {
+            addMovimentos.innerHTML = `${recordMovimentos} movimentos!`
+        }
+
+
+        let totalDeUsuarios = nike + adidas + ous + puma + vans 
+        
+        let porcentagemNike = nike/totalDeUsuarios * 100
+        let porcentagemAdidas = adidas/totalDeUsuarios * 100
+        let porcentagemOus = ous/totalDeUsuarios * 100
+        let porcentagemPuma = puma/totalDeUsuarios * 100
+        let porcentagemVans = vans/totalDeUsuarios * 100
 
 
 
@@ -403,8 +484,8 @@
             data: {
                 labels: ['Nike', 'Adidas', 'Vans', 'Puma', 'Ous'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [nike, adidas, vans, puma, ous],
+                    label: '% de usuários',
+                    data: [ porcentagemNike, porcentagemAdidas, porcentagemVans, porcentagemPuma, porcentagemOus],
                     backgroundColor: 'rgba(49, 27, 146, 0.5)',
                     borderColor: 'rgba(49, 27, 146, 0.6)',
                     borderWidth: 3
@@ -438,6 +519,7 @@
         </div>
     `;
         });
+        
 
     }
 

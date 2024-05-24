@@ -12,6 +12,18 @@ function autenticar(email, senha) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function atualizarDados(email, idUsuario) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, idUsuario)
+    var instrucaoSql = `
+    SELECT idUsuario, nome, sobrenome, email, fkmarcaFavorita, min(registrojogo.tempoemsegundos) as MenorTempo, min(registrojogo.movimentos) as MenorMovimentos FROM usuario 
+    left join ranking on ranking.fkUsuario = usuario.idusuario 
+    left join registroJogo on registrojogo.idjogo = ranking.fkregistro
+    WHERE email = '${email}' AND idUsuario = '${idUsuario}'
+    group by usuario.idusuario
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, sobrenome, email, senha, favorito) {
@@ -28,5 +40,6 @@ function cadastrar(nome, sobrenome, email, senha, favorito) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    atualizarDados
 };

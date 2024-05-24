@@ -7,6 +7,11 @@
     font-family: 'Montserrat';
 }
 
+body {
+  background-image:  url("/assets/imgs/backgroundNoticias.png");
+  background-size: cover;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -69,52 +74,106 @@ nav button:hover{
     background-color: #6D4C41;
 }
 #News {
-    margin-top: 50px;
+    margin-top: 25px;
     text-align: center;
     color: #311B92;
     font-size: 50px;
 }
 
-main {
-    height: 100vh;
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-  }
-  
-  span {
-    font-size: x-large;
-  }
-  
-  img {
-    box-shadow: 0 1px 2px #0003;
-    width: 100%;
-  }
-  
-  .swiper {
-    height: 500px;
-  }
-  
-  .swiper-slide {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  @media (max-width: 450px) {
-    .swiper {
-      height: 270px;
-    }
-  }
+.carrosel {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* background-image: url("/assets/imgs/backgroundNoticias.png"); */
+  background-size: cover;
+  align-items: center;
+  margin-bottom: 7rem;
+}
+.slider {
+  margin-top: 50px;
+  position: relative;
+  width: 80%;
+  max-width: 1000px;
+  overflow: hidden;
+  /* border: 2px solid #311B92; */
+  border-radius: 10px;
+}
 
-  .Carrosel {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide img {
+  /* opacity: 0.7; */
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  display: block;
+}
+
+.slide h1 {
+  color: #311B92;
+  font-size: 35px;
+  margin-top: -90px;
+  text-align: center;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}   
+
+.NewsSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 150px;
+  width: 100%;
+}
+
+.newsHeader {
+  color: #311B92;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 30px;
+}
+
+.newsHeader div {
+  width: 1000px;
+  height: 2px;
+  background-color: #311B92;
+}
+
+.newsBox {
+  width: 80%;
+    
+}

@@ -5,23 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/internet.png">
         <link rel="stylesheet" href="./css/noticias.css">
-        <link
-        rel="stylesheet"
-        href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
-        />
-        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
         <script defer src="./js/slider.js"></script>
     <title>Noticias e Lançamentos</title>
 </head>
 <body>
     <header>
         <nav>
-            <a href="">
+            <a href="/index.html">
                 <img src="./assets/imgs/logo.png" alt="">
             </a>
             <ul class="nav-list">
-                <li><a href="#"><i>Inicio</i></a></li>
-                <li><a href="#about"><i>Sobre</i></a></li>
+                <li><a href="/index.html"><i>Inicio</i></a></li>
+                <li><a href="/index.html#about"><i>Sobre</i></a></li>
                 <li><a href="./noticias.html"><i>Notícias & Lançamentos</i></a></li>
                 <!-- <li><a href="#"><i>Notícias</i></a></li> -->
                 <li><a href="#"><i>Sustentabilidade</i></a></li>
@@ -29,33 +24,29 @@
             <button><a href="login.html" id="nav-button">Entrar</a></button>
         </nav>
     </header>
-    <h1 id="News"><i>Últimos lançamentos</i></h1>
-    <div class="Carrosel">
-        <main>
-        <div class="swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="project-img">
-                  <img src="../img/puma-suede.webp" alt="Foto 01">
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="project-img">
-                  <img src="./img/foto_02.png" alt="Foto 02">
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="project-img">
-                  <img src="./img/foto_03.png" alt="Foto 03">
-                </div>
-              </div>
+    <div class="carrosel">
+      <h1 id="News"><i>Últimos lançamentos</i></h1>
+      <div class="slider">
+        <div class="slides">
+            <div class="slide"><img src="./assets/imgs/2.png" alt="Image 1">
             </div>
-          
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
+            <div class="slide"><img src="./assets/imgs/1.png" alt="Image 2"></div>
+            <div class="slide"><img src="./assets/imgs/3.png" alt="Image 3"></div>
+            <div class="slide"><img src="./assets/imgs/4.png" alt="Image 4"></div>
         </div>
-      </main>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="NewsSection">
+      <div class="newsHeader">
+        <h1>News</h1>
+        <div></div>
+        <h1>sweN</h1>
+      </div>
+      <div class="newsBox">
+
+      </div>
     </div>
 
 </body>
