@@ -286,7 +286,7 @@
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Tempo',
+                    label: 'Tempo em segundos',
                     data: [],
                     backgroundColor: 'rgba(49, 27, 146, 0.5)',
                     borderColor: 'rgba(49, 27, 146, 0.6)',
@@ -383,7 +383,7 @@
 
     if(atualizarPagina == 1) {
         sessionStorage.setItem('AtualizarPagina' , 0 )
-        window.location.reload(true)
+        window.location.reload(false)
     }
     }
 </script>

@@ -4,22 +4,22 @@ use SneakerWorld;
 
 create table marca (
 idMarca int primary key auto_increment,
-nome varchar(15)
+nome varchar(20)
 );
 
 create table usuario (
 idUsuario int primary key auto_increment,
-nome varchar(45),
-sobrenome varchar(45),
+nome varchar(25),
+sobrenome varchar(25),
 email varchar(264) unique,
 fkMarcaFavorita int,
 constraint fkMarcaUsuario foreign key (fkMarcaFavorita) references marca(idMarca),
-senha varchar(45)
+senha varchar(20)
 );
 
 create table registroJogo (
 idJogo int primary key auto_increment,
-TempoEmSegundos Varchar(45),
+TempoEmSegundos int,
 movimentos int 
 );
 
@@ -40,8 +40,6 @@ insert into marca values
 (default, 'OUS');
 
 select * from usuario;
-
-select registroJogo.tempoEmSegundos, DATE_FORMAT(dtJogo, '%d/%m/%Y') as data from registroJogo join ranking on ranking.fkregistro = registrojogo.idjogo where fkUsuario = 1 order by registrojogo.idjogo desc limit 7;
 
 INSERT INTO usuario (nome, sobrenome, email, fkMarcaFavorita, senha) VALUES
 ('João', 'Silva', 'joao.silva1@example.com', 3, 'senha123'),

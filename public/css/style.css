@@ -41,9 +41,15 @@ nav {
     letter-spacing: -1px;
 }
 
+header a:hover {
+    opacity: 0.7;
+    transition: 0.3s;   
+}
+
 nav a img {
     width: 200px;
     height: 200px;
+
 }
 
 nav button {
@@ -164,7 +170,7 @@ nav button:hover{
 }
 
 .boxBottom {
-    padding: 5px;
+    padding: 20px;
     width: 350px;
     height: 400px;
     border-radius: 15px;

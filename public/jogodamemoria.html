@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,8 @@
     <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/internet.png">
     <script src="./js/sessao.js"></script>
 </head>
-<body>
+
+<body onload="CarregarDados()">
     <div class="sideBar">
         <div class="user">
             <img src="./assets/imgs/usuario.png" alt="">
@@ -55,13 +57,14 @@
                     </div>
                 </main>
             </div>
-    </div>
+        </div>
 </body>
+
 </html>
 
 <script>
 
-const grid = document.querySelector('.grid');
+    const grid = document.querySelector('.grid');
     const spanPlayer = document.querySelector('.player')
     const timer = document.querySelector('.timer')
     const moves = document.querySelector('.moves')
@@ -262,4 +265,45 @@ const grid = document.querySelector('.grid');
         LoadGame()
     }
 
+
+    function CarregarDados() {
+
+        let marca = sessionStorage.getItem('MARCAFAVORITA_USUARIO')
+        const nome = sessionStorage.getItem('NOME_USUARIO')
+        let sobrenome = sessionStorage.getItem('SOBRENOME_USUARIO')
+        let recordtempo = sessionStorage.getItem('RECORD_TEMPO')
+        let recordMovimentos = sessionStorage.getItem('RECORD_MOVIMENTOS')
+        const addMarca = document.querySelector('#favoriteBrand')
+        const addNome = document.querySelector('#p_nome')
+        const addSobrenome = document.querySelector('#p_sobrenome')
+        const addTempo = document.querySelector('#inserir_record_tempo')
+        const addMovimentos = document.querySelector('#inserir_record_movimentos')
+        addNome.innerHTML = nome
+        addSobrenome.innerHTML = sobrenome
+
+
+        if (recordtempo == 'null') {
+            addTempo.innerHTML = 'Jogue a primeira vez!'
+        } else {
+            addTempo.innerHTML = `${recordtempo} segundos!`
+        }
+
+
+        if (recordMovimentos == 'null') {
+            addMovimentos.innerHTML = 'Jogue a primeira vez!'
+        } else {
+            addMovimentos.innerHTML = `${recordMovimentos} movimentos!`
+        }
+        if (marca == 1) {
+            addMarca.innerHTML += `<img src="./assets/imgs/nike.png" alt="">`
+        } else if (marca == 2) {
+            addMarca.innerHTML += `<img src="./assets/imgs/adidas.png" alt="">`
+        } else if (marca == 3) {
+            addMarca.innerHTML += `<img src="./assets/imgs/vans.webp" alt="">`
+        } else if (marca == 4) {
+            addMarca.innerHTML += `<img src="./assets/imgs/puma.png" alt="">`
+        } else if (marca == 5) {
+            addMarca.innerHTML += `<img src="./assets/imgs/ous.webp" alt="">`
+        }
+    }
 </script>
