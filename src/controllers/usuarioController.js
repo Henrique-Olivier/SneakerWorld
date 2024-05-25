@@ -1,7 +1,9 @@
 // var aquarioModel = require("../models/aquarioModel");
 var usuarioModel = require("../models/usuarioModel");
 var contadorModel = require("../models/contadorModel");
-var rankingModel = require("../models/rankingModel")
+var rankingModel = require("../models/rankingModel");
+var historicoTempoModel = require("../models/historicoTempoModel");
+
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -90,17 +92,22 @@ function atualizarDados(req, res) {
                                     rankingModel.MontarRanking()
                                         .then((resultadoRanking) => {
 
-                                            res.json({
-                                                id: resultadoAutenticar[0].idUsuario,
-                                                email: resultadoAutenticar[0].email,
-                                                nome: resultadoAutenticar[0].nome,
-                                                sobrenome: resultadoAutenticar[0].sobrenome,
-                                                marcaFavorita: resultadoAutenticar[0].fkmarcaFavorita,
-                                                menorMovimento: resultadoAutenticar[0].MenorMovimentos,
-                                                menorTempo: resultadoAutenticar[0].MenorTempo,
-                                                contador: resultadoContador,
-                                                ranking: resultadoRanking
-                                            });
+                                            historicoTempoModel.historicoTempo(idUsuario)
+                                                .then((resultadoHistoricoTempo) => {
+                                                    res.json({
+                                                        id: resultadoAutenticar[0].idUsuario,
+                                                        email: resultadoAutenticar[0].email,
+                                                        nome: resultadoAutenticar[0].nome,
+                                                        sobrenome: resultadoAutenticar[0].sobrenome,
+                                                        marcaFavorita: resultadoAutenticar[0].fkmarcaFavorita,
+                                                        menorMovimento: resultadoAutenticar[0].MenorMovimentos,
+                                                        menorTempo: resultadoAutenticar[0].MenorTempo,
+                                                        contador: resultadoContador,
+                                                        ranking: resultadoRanking,
+                                                        historicoTempo: resultadoHistoricoTempo
+                                                    });
+                                                })
+
                                         })
 
                                 } else {

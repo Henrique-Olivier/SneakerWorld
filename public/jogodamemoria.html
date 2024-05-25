@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da memória</title>
+    <link rel="stylesheet" href="./css/jogodamemoria.css">
+    <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/internet.png">
+    <script src="./js/sessao.js"></script>
+</head>
+<body>
+    <div class="sideBar">
+        <div class="user">
+            <img src="./assets/imgs/usuario.png" alt="">
+            <div>
+                <p id="p_nome">Henrique</p>
+                <p id="p_sobrenome">Olivier</p>
+            </div>
+        </div>
+        <div class="userData">
+            <h2>Records:</h2>
+            <div>
+                <h3>Tempo:</h3>
+                <p id="inserir_record_tempo"></p>
+            </div>
+            <div>
+                <h3>Movimentos:</h3>
+                <p id="inserir_record_movimentos"></p>
+            </div>
+        </div>
+        <div class="favoriteBrand" id="favoriteBrand">
+            <h2>Marca Favorita:</h2>
+        </div>
+        <button onclick="limparSessao()">Sair</button>
+    </div>
+    <div class="screen">
+        <header>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="jogodamemoria.html"><b>Jogo da memória</b></a></li>
+            </ul>
+        </header>
+        <div class="memorygameContainer">
+            <div class="memoryGame">
+                <main>
+                    <header class="headerGame">
+                        <span>Movimentos: <span class="moves">00</span></span>
+                        <span>Tempo: <span class="timer">00</span></span>
+                    </header>
+                    <div class="container">
+                        <h1>Jogo da Memoria</h1>
+                        <div class="grid">
+                        </div>
+                        <button onclick="ButtonStart()" id="ButtonStart">Iniciar</button>
+                    </div>
+                </main>
+            </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+const grid = document.querySelector('.grid');
+    const spanPlayer = document.querySelector('.player')
+    const timer = document.querySelector('.timer')
+    const moves = document.querySelector('.moves')
+    const StartButton = document.querySelector('#ButtonStart')
+
+    const CardElements = [
+        'img-1',
+        'img-2',
+        'img-3',
+        'img-4',
+        'img-5',
+        'img-6',
+        'img-7',
+        'img-8',
+    ]
+
+    const createElement = (tag, className) => {
+        const element = document.createElement(tag);
+        element.className = className;
+        return element;
+    }
+
+    let FirstCard = '';
+    let SecondCard = '';
+    let movesCount = 0
+
+    const checkEndGame = () => {
+        const disabledCards = document.querySelectorAll('.disable-card');
+
+        if (disabledCards.length === 16) {
+            const idVar = sessionStorage.ID_USUARIO;
+            const tempoVar = timer.innerHTML;
+            clearInterval(this.loop);
+
+            alert(`Parabéns! Seu tempo foi: ${tempoVar} segundos, com ${movesCount} Movimentos.`);
+
+            fetch('/avisos/publicar', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    tempoServer: tempoVar,
+                    movimentosServer: movesCount
+                })
+            }).then(resposta => {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else if (resposta.status === 404) {
+                    window.alert("Deu 404!");
+                    return null;
+                } else {
+                    throw new Error("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).then(data => {
+                if (data) {
+                    let idRegistro = data.insertId
+                    let idUsuario = sessionStorage.getItem('ID_USUARIO')
+                    // window.alert("Realizado Cadastro memory game");
+
+                    fetch(`/avisos/cadastrarRanking`, {
+                        method: "post",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            idRegistroServer: idRegistro,
+                            idUsuarioServer: idUsuario
+                        })
+                    }).then(function (resposta) {
+
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            window.location.reload(true)
+
+                            sessionStorage.setItem('AtualizarPagina', 1)
+                        } else if (resposta.status == 404) {
+                            window.alert("Deu 404!");
+                        } else {
+                            throw ("erro ranking" + resposta.status);
+                        }
+                    }).catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+                        // finalizarAguardar();
+                    });
+
+                    return false;
+
+                }
+            }).catch(erro => {
+                console.error(`#ERRO: ${erro}`);
+            });
+
+            return false;
+        }
+    }
+
+
+    const checkCards = () => {
+        const firstElement = FirstCard.getAttribute('data-element')
+        const secondElement = SecondCard.getAttribute('data-element')
+
+        if (firstElement == secondElement) {
+            FirstCard.firstChild.classList.add('disable-card')
+            SecondCard.firstChild.classList.add('disable-card')
+
+            FirstCard = '';
+            SecondCard = '';
+
+
+            checkEndGame();
+        } else {
+
+            setTimeout(() => {
+                FirstCard.classList.remove('reveal-card')
+                SecondCard.classList.remove('reveal-card')
+
+                FirstCard = '';
+                SecondCard = '';
+            }, 500)
+        }
+
+
+    }
+
+    const revealCard = ({ target }) => {
+
+        if (target.parentNode.className.includes('reveal-card')) {
+            return;
+        }
+
+        if (FirstCard == '') {
+            target.parentNode.classList.add('reveal-card');
+            FirstCard = target.parentNode
+        } else if (SecondCard == '') {
+            target.parentNode.classList.add('reveal-card');
+            SecondCard = target.parentNode;
+
+            checkCards();
+        }
+
+        movesCount += 1
+        moves.innerHTML = movesCount
+    }
+
+
+    const CreateCard = (CardElement) => {
+
+
+        const card = createElement('div', 'card');
+        const front = createElement('div', 'face front');
+        const back = createElement('div', 'face back');
+
+        front.style.backgroundImage = `url('./assets/imgs/${CardElement}.png')`;
+
+        card.appendChild(front);
+        card.appendChild(back);
+
+        card.addEventListener('click', revealCard)
+        card.setAttribute('data-element', CardElement)
+
+        return card;
+    }
+
+    const LoadGame = () => {
+
+        const DuplicateElements = [...CardElements, ...CardElements];
+
+        const ShuffledArray = DuplicateElements.sort(() => Math.random() - 0.5);
+
+        DuplicateElements.forEach((cardElement) => {
+
+            const card = CreateCard(cardElement)
+            grid.appendChild(card)
+        });
+    }
+
+    const startTimer = () => {
+
+        this.loop = setInterval(() => {
+
+            const currentTime = Number(timer.innerHTML);
+            timer.innerHTML = currentTime + 1;
+
+        }, 1000)
+    }
+
+
+    const ButtonStart = () => {
+
+        StartButton.style.display = 'none'
+
+        const playerName = localStorage.getItem('nome');
+
+        // spanPlayer.innerHTML = playerName
+        startTimer()
+        LoadGame()
+    }
+
+</script>
