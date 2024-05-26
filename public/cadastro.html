@@ -43,7 +43,8 @@
                     <input required type="password" id="input_senha" class="input" placeholder="Digite sua senha">
                     <label for="confirmacaoSenha">Confirmação</label>
                     <small id="alerta_confirmacao"></small>
-                    <input required type="password" id="confirmacaoSenha" class="input" placeholder="Confirme sua senha">
+                    <input required type="password" id="confirmacaoSenha" class="input"
+                        placeholder="Confirme sua senha">
                     <small id="alerta_cadastro"></small>
                     <button onclick="cadastrar()">Cadastrar</button>
                     <small id="alerta_cadastroRealizado"></small>
@@ -88,7 +89,7 @@
                 alerta_confirmacao.innerHTML = ' '
                 alerta_confirmacao.style.display = 'none'
             }, 5000)
-        } else if (emailVar.indexOf('@') == -1 ) {
+        } else if (emailVar.indexOf('@') == -1) {
             alerta_email.innerHTML = 'O email precisa de um domínio (@exemplo.com)! '
             alerta_email.style.display = 'block'
             setTimeout(function () {
@@ -97,46 +98,97 @@
             }, 5000)
         } else {
 
-            fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        sobrenomeServer: sobrenomeVar,
-        emailServer: emailVar,
-        favoritoServer: favoritoVar,
-        senhaServer: senhaVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+            let validarSenha = false
+            const letrasMaisculas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+            const letrasMinusculas = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+            const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+            const caracteresEspeciais = ['@', '$', '#', '&', '%']
+            let temMaiscula = false
+            let temMinuscula = false
+            let temNumero = false
+            let temEspeciais = false
+            let tamanhoMinimo = senhaVar > 6
 
-        if (resposta.ok) {
-            alerta_cadastroRealizado.innerHTML = 'Cadastro realizado com sucesso...<br> Redirecionando para o login.'
+            for (let posicao = 0; posicao <= senhaVar.length; posicao++) {
+                let caracter = senhaVar[posicao]
 
-        //   mensagem_erro.innerHTML =
-        //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                if (letrasMaisculas.indexOf(caracter) != -1) {
+                    temMaiscula = true
+                }
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
+                if (letrasMinusculas.indexOf(caracter) != -1) {
+                    temMinuscula = true
+                }
 
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+                if (numeros.indexOf(caracter) != -1) {
+                    temNumero = true
+                }
 
-    return false;
-            // setTimeout(function () {
-            //     window.location = '../LOGIN V2/login.html'
-            // }, 3000)
+                if (caracteresEspeciais.indexOf(caracter) != -1) {
+                    temEspeciais = true
+                }
+            }
+
+            if (temMaiscula && temMinuscula && temNumero && temEspeciais) {
+                validarSenha = true
+            }
+
+            if (!validarSenha) {
+                alerta_confirmacao.innerHTML = `
+                    Sua senha precisa conter: <br>
+                    Uma letra maiuscula <br>
+                    Uma letra minuscula<br>
+                    Um numero<br>
+                    E um caracter especial (@,#,$,%,&)  
+                    `
+                alerta_confirmacao.style.display = 'block'
+                setTimeout(function () {
+                    alerta_confirmacao.innerHTML = ' '
+                    alerta_confirmacao.style.display = 'none'
+                }, 8000)
+            } else {
+                fetch("/usuarios/cadastrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        // crie um atributo que recebe o valor recuperado aqui
+                        // Agora vá para o arquivo routes/usuario.js
+                        nomeServer: nomeVar,
+                        sobrenomeServer: sobrenomeVar,
+                        emailServer: emailVar,
+                        favoritoServer: favoritoVar,
+                        senhaServer: senhaVar
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            alerta_cadastroRealizado.innerHTML = 'Cadastro realizado com sucesso...<br> Redirecionando para o login.'
+                            alerta_cadastroRealizado.style.color = 'green   '
+                            alerta_cadastroRealizado.style.display = 'block'
+                            //   mensagem_erro.innerHTML =
+                            //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                            setTimeout(() => {
+                                window.location = "login.html";
+                            }, "2000");
+
+                        } else {
+                            throw "Houve um erro ao tentar realizar o cadastro!";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+                    });
+
+                return false;
+                // setTimeout(function () {
+                //     window.location = '../LOGIN V2/login.html'
+                // }, 3000)
+            }
         }
 
     }

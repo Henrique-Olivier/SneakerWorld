@@ -79,35 +79,28 @@ nav button:hover{
     background-color: #6D4C41;
 }
 
-.goals {
-    margin-top: 3rem;
-    text-align: center;
-    color: #311B92;
-}
-
-.goals img {
-    margin-top: 3rem;
-    height: 150px;
-}
-
-.box img:hover {
-    height: 320px;
-    transition: ease 0.3s;
-    opacity: 0.8;
-
-}
-
-.boxes {
-    width: 100%;
+.container {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
 }
 
-.box {
-    margin: 15px;
-    margin-top: -15px;
+.sustainability {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    font-size: 25px;
+
 }
 
-.box img{
-    height: 300px;
+.sustainability h1 {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.sustainability img {
+    width: 60%;
+    margin: 25px;
 }

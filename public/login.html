@@ -85,9 +85,14 @@
                     sessionStorage.RECORD_MOVIMENTOS = json.menorMovimento;
                     sessionStorage.CONTADORMARCAS = JSON.stringify(json.contador)
                     sessionStorage.RANKING = JSON.stringify(json.ranking)
+                    sessionStorage.setItem('AtualizarPagina', 1)
+
+                    alerta.innerHTML = 'Login realizado com sucesso! <br> Redirecionando para a dashboard...'
+                    alerta.style.color = 'green'
+                    alerta.style.display = 'block'
                     setTimeout(function () {
                         window.location = "dashboard.html";
-                    }, 1000); // apenas para exibir o loading
+                    }, 2000); // apenas para exibir o loading
 
                 });
 
