@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="./css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/internet.png">
@@ -356,12 +356,28 @@
 
         }
         
+        const medalhas = {
+            ouro: '<img src="/assets/imgs/medalhaOuro.png">',
+            prata: '<img src="/assets/imgs/medalhaPrata.png">',
+            bronze: '<img src="/assets/imgs/medalhaBronze.png">'
+        }
+
         var ranking = JSON.parse(sessionStorage.RANKING);
         ranking.forEach((item, index) => {
+        let posicao = `${index + 1}º`
+            
+            if(posicao == "1º") {
+                posicao = medalhas.ouro
+            } else if (posicao == "2º") {
+                posicao = medalhas.prata
+            } else if (posicao == '3º'){
+                posicao = medalhas.bronze        
+            }
+
             document.getElementById("rankingGrid").innerHTML += `
             <div class="rankingPosition">
                         <div class="positionNumber">
-                            <p>${index + 1}º</p>
+                            <p>${posicao}</p>
                         </div>
                         <div class="playerName">
                             <p>${item.Nome}</p>

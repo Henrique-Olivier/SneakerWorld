@@ -230,6 +230,11 @@ header a {
     justify-content: space-around;
 }
 
+.rankingPosition img {
+    height: 50px;
+    width: 50px;
+}
+
 .rankingPosition div {
     display: flex;
     align-items: center;
