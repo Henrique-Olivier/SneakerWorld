@@ -3,11 +3,11 @@ var database = require("../database/config")
 function autenticar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucaoSql = `
-    SELECT idUsuario, nome, sobrenome, email, fkmarcaFavorita, min(registrojogo.tempoemsegundos) as MenorTempo, min(registrojogo.movimentos) as MenorMovimentos FROM usuario 
-    left join ranking on ranking.fkUsuario = usuario.idusuario 
-    left join registroJogo on registrojogo.idjogo = ranking.fkregistro
+    SELECT idUsuario, nome, sobrenome, email, fkmarcaFavorita, min(registroJogo.TempoEmSegundos) as MenorTempo, min(registroJogo.movimentos) as MenorMovimentos FROM usuario 
+    left join ranking on ranking.fkUsuario = usuario.idUsuario 
+    left join registroJogo on registroJogo.idJogo = ranking.fkRegistro
     WHERE email = '${email}' AND senha = '${senha}'
-    group by usuario.idusuario
+    group by usuario.idUsuario
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -15,9 +15,9 @@ function autenticar(email, senha) {
 function atualizarDados(email, idUsuario) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, idUsuario)
     var instrucaoSql = `
-    SELECT idUsuario, nome, sobrenome, email, fkmarcaFavorita, min(registrojogo.tempoemsegundos) as MenorTempo, min(registrojogo.movimentos) as MenorMovimentos FROM usuario 
+    SELECT idUsuario, nome, sobrenome, email, fkmarcaFavorita, min(registroJogo.TempoEmSegundos) as MenorTempo, min(registroJogo.movimentos) as MenorMovimentos FROM usuario 
     left join ranking on ranking.fkUsuario = usuario.idusuario 
-    left join registroJogo on registrojogo.idjogo = ranking.fkregistro
+    left join registroJogo on registroJogo.idJogo = ranking.fkRegistro
     WHERE email = '${email}' AND idUsuario = '${idUsuario}'
     group by usuario.idusuario
     `;

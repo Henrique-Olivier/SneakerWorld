@@ -2,9 +2,9 @@ var database = require("../database/config");
 
 function MontarRanking() {
 
-  var instrucaoSql = `select usuario.nome as Nome, registrojogo.tempoemsegundos as Tempo, registroJogo.movimentos as Movimentos, DATE_FORMAT(ranking.dtJogo, '%d/%m/%Y') as data from ranking 
+  var instrucaoSql = `select usuario.nome as Nome, registroJogo.TempoEmSegundos as Tempo, registroJogo.movimentos as Movimentos, DATE_FORMAT(ranking.dtJogo, '%d/%m/%Y') as data from ranking 
   join usuario on ranking.fkUsuario= usuario.idusuario 
-  join registroJogo on ranking.fkRegistro = registrojogo.idjogo
+  join registroJogo on ranking.fkRegistro = registroJogo.idjogo
   order by tempo asc
   limit 10;`;
 

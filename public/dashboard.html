@@ -310,7 +310,7 @@
             for (let posicao = 0; posicao < historicoTempo.length; posicao++) {
                 let dadoAtual = historicoTempo[posicao];
                 timeChart.data.labels.push(dadoAtual.data);
-                timeChart.data.datasets[0].data.push(dadoAtual.tempoEmSegundos);
+                timeChart.data.datasets[0].data.push(dadoAtual.TempoEmSegundos);
             }
 
             timeChart.update();
