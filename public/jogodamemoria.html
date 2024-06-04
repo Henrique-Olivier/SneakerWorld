@@ -101,7 +101,7 @@
 
             alert(`Parabéns! Seu tempo foi: ${tempoVar} segundos, com ${movesCount} Movimentos.`);
 
-            fetch('/avisos/publicar', {
+            fetch('/ranking/publicar', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -125,7 +125,7 @@
                     let idUsuario = sessionStorage.getItem('ID_USUARIO')
                     // window.alert("Realizado Cadastro memory game");
 
-                    fetch(`/avisos/cadastrarRanking`, {
+                    fetch(`/ranking/cadastrarRanking`, {
                         method: "post",
                         headers: {
                             "Content-Type": "application/json"

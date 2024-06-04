@@ -45,7 +45,7 @@
         </header>
         <div class="FavoriteData">
             <div class="FavoriteConter">
-                <h1>Contador Marcas</h1>
+                <h1>Placar das marcas</h1>
                 <div class="BrandBox">
                     <div class="nike">
                         <h2>Nike</h2>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="FavoriteChart">
+            <div class="FavoriteChart"> 
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -122,10 +122,6 @@
     function atualizarDados() {
         const emailVar = sessionStorage.getItem("EMAIL_USUARIO")
         const idUsuarioVar = sessionStorage.getItem("ID_USUARIO")
-        // const alerta = document.querySelector('#alerta')
-
-        // console.log("FORM LOGIN: ", emailVar);
-        // console.log("FORM SENHA: ", senhaVar);
 
         fetch("/usuarios/atualizarDados", {
             method: "POST",
@@ -363,8 +359,11 @@
         }
 
         var ranking = JSON.parse(sessionStorage.RANKING);
-        ranking.forEach((item, index) => {
-        let posicao = `${index + 1}º`
+        let posicaoRanking = 0
+        
+        ranking.forEach((item) => {
+        posicaoRanking += 1 
+        let posicao = `${posicaoRanking}º`
             
             if(posicao == "1º") {
                 posicao = medalhas.ouro

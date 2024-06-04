@@ -17,7 +17,7 @@ var app = express();
 
 var usuarioRouter = require("./src/routes/usuarios"); 
 var indexRouter = require("./src/routes/index");
-var avisosRouter = require("./src/routes/avisos");
+var rankingRouter = require("./src/routes/ranking");
 
 // var memorygameRouter = require("./src/routes/memorygame");  
 // var avisosRouter = require("./src/routes/avisos");
@@ -33,7 +33,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/avisos", avisosRouter);
+app.use("/ranking", rankingRouter);
 // app.use("/memorygame", memorygameRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
