@@ -42,6 +42,10 @@ body {
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
+.favoriteBrand img {
+    width: 200px;
+}
+
 .user p {
     font-size: 30px;
     text-align: center;
